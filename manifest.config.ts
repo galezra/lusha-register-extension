@@ -27,9 +27,14 @@ export default defineManifest(async (env) => ({
       '128': 'logo128.png',
     },
   },
+  background: {
+    service_worker: 'src/utils/background.js',
+    type: 'module',
+  },
+  permissions: ['runtime'],
   content_scripts: [
     {
-      matches: ['http://*/*', 'https://*/*'],
+      matches: ['http://*.lusha.com/signup*', 'https://*.lusha.com/signup*'],
       js: ['src/utils/content.ts'],
       run_at: 'document_end',
     },
