@@ -1,27 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DEFAULT_FORM_VALUES, FORM_VALUE_KEY } from '../../constants/global';
+import { ISignup } from '../../constants/types';
 import useLocalStorage from '../../hooks/useLocalStorage';
-interface FormValues {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  selfAttribution: string;
-}
 
 function useForm() {
-  const [localStorageValue, setLocalStorageValue] = useLocalStorage<FormValues>(FORM_VALUE_KEY, DEFAULT_FORM_VALUES);
-  const [form, setForm] = useState<FormValues>(localStorageValue);
+  const [localStorageValue, setLocalStorageValue] = useLocalStorage<ISignup>(FORM_VALUE_KEY, DEFAULT_FORM_VALUES);
+  const [form, setForm] = useState<ISignup>(localStorageValue);
+
+  useEffect(() => {
+    setLocalStorageValue(form);
+  }, [form]);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target;
+    const { name, value, checked } = event.target;
+    const inputValue = event.target.type === 'checkbox' ? checked : value;
+
     setForm({
       ...form,
-      [name]: value,
+      [name]: inputValue,
     });
-
-    setLocalStorageValue({ ...form, [name]: value });
   }
 
   return {

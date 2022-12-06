@@ -1,4 +1,5 @@
 import { ISignup } from './../constants/types';
+import { addRandomString } from './global';
 import { SignupElements } from './SignupElements';
 
 export class Signup {
@@ -8,15 +9,17 @@ export class Signup {
   password: string;
   phoneNumber: string;
   selfAttribution: string;
+  autoSignup: boolean;
   private signupForm: SignupElements;
 
-  constructor({ email, firstName, lastName, password, phoneNumber, selfAttribution }: ISignup) {
-    this.email = email;
+  constructor({ email, firstName, lastName, password, phoneNumber, selfAttribution, autoSignup }: ISignup) {
+    this.email = addRandomString(email);
     this.firstName = firstName;
     this.lastName = lastName;
     this.password = password;
     this.phoneNumber = phoneNumber;
     this.selfAttribution = selfAttribution;
+    this.autoSignup = autoSignup;
     this.signupForm = new SignupElements();
   }
 
@@ -31,6 +34,8 @@ export class Signup {
     await this.delay(200);
     this.signupForm.changeValue(this.signupForm.selfAttribution, 'other');
 
-    // this.signupForm.submitForm();
+    if (this.autoSignup) {
+      this.signupForm.submitForm();
+    }
   }
 }
