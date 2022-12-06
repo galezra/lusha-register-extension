@@ -30,16 +30,9 @@ const Form = ({ handleClose }: any) => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    const user = {
-      firstName: 'Bob',
-      lastName: 'Dylan',
-      phoneNumber: '14242424242',
-      selfAttribution: 'other',
-    };
-
     chrome.runtime.sendMessage({
       type: 'fillForm',
-      data: { ...form, ...user },
+      data: form,
     });
   };
 
@@ -62,6 +55,46 @@ const Form = ({ handleClose }: any) => {
         type='text'
         required
         value={form.password}
+        size='small'
+        onChange={handleChange}
+      />
+      <TextField
+        name='firstName'
+        label='First Name'
+        variant='filled'
+        type='text'
+        required
+        value={form.firstName}
+        size='small'
+        onChange={handleChange}
+      />
+      <TextField
+        name='lastName'
+        label='Last name'
+        variant='filled'
+        type='text'
+        required
+        value={form.lastName}
+        size='small'
+        onChange={handleChange}
+      />
+      <TextField
+        name='phoneNumber'
+        label='Phone Number'
+        variant='filled'
+        type='text'
+        required
+        value={form.phoneNumber}
+        size='small'
+        onChange={handleChange}
+      />
+      <TextField
+        name='selfAttribution'
+        label='Self Attribution'
+        variant='filled'
+        type='text'
+        required
+        value={form.selfAttribution}
         size='small'
         onChange={handleChange}
       />
