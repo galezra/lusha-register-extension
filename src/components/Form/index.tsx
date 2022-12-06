@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
+import Checkbox from '@mui/material/Checkbox';
+import Typography from '@mui/material/Typography';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import useForm from './useForm';
 
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme: any) => ({
   },
 }));
 
-const Form = ({ handleClose }: any) => {
+const Form = ({ onClose }: any) => {
   const classes = useStyles();
   const { form, handleChange } = useForm();
 
@@ -98,12 +100,22 @@ const Form = ({ handleClose }: any) => {
         size='small'
         onChange={handleChange}
       />
+      <FormControlLabel
+        label={
+          <Typography variant='body1' fontWeight={540}>
+            Auto register
+          </Typography>
+        }
+        name='autoSignup'
+        style={{ color: 'grey', fontSize: '1px', alignSelf: 'flex-start' }}
+        control={<Checkbox name='autoSignup' checked={form.autoSignup} size='small' onChange={handleChange} />}
+      />
       <div>
-        <Button variant='contained' onClick={handleClose}>
-          Cancel
-        </Button>
         <Button type='submit' variant='contained' color='primary'>
           Signup
+        </Button>
+        <Button variant='contained' onClick={onClose}>
+          Cancel
         </Button>
       </div>
     </form>

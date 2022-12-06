@@ -7,4 +7,5 @@ export const DEFAULT_FORM_VALUES = {
   lastName: 'Doe',
   phoneNumber: '14242424242',
   selfAttribution: 'Other',
+  autoSignup: true,
 };
