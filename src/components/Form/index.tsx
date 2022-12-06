@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Signup } from '../../utils/Signup';
+import useForm from './useForm';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme: any) => ({
     justifyContent: 'center',
     alignItems: 'center',
     padding: theme.spacing(2),
+    background: 'white',
 
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
@@ -24,45 +25,45 @@ const useStyles = makeStyles((theme: any) => ({
 
 const Form = ({ handleClose }: any) => {
   const classes = useStyles();
-  const [email, setEmail] = useState('gal@sfds.ocm');
-  const [password, setPassword] = useState('2131231231');
+  const { form, handleChange } = useForm();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     const user = {
-      email: 'gal.ezra@lusha.com',
-      password: '123456Gr',
       firstName: 'Bob',
       lastName: 'Dylan',
       phoneNumber: '14242424242',
       selfAttribution: 'other',
     };
 
-    // Send form data to the background script for processing
     chrome.runtime.sendMessage({
       type: 'fillForm',
-      data: user,
+      data: { ...form, ...user },
     });
   };
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       <TextField
+        name='email'
         label='Email'
         variant='filled'
         type='email'
         required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={form.email}
+        size='small'
+        onChange={handleChange}
       />
       <TextField
+        name='password'
         label='Password'
         variant='filled'
-        type='password'
+        type='text'
         required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={form.password}
+        size='small'
+        onChange={handleChange}
       />
       <div>
         <Button variant='contained' onClick={handleClose}>
