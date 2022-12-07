@@ -17,6 +17,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
       const valueToStore = value instanceof Function ? value(storedValue) : value;
 
       setStoredValue(valueToStore);
+      chrome.storage.local.set({ [key]: JSON.stringify(valueToStore) });
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
       console.log(error);

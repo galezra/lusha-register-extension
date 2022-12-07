@@ -32,7 +32,7 @@ export class Signup {
     this.signupForm.changeValue(this.signupForm.phoneNumber, this.phoneNumber);
     this.signupForm.changeValue(this.signupForm.password, this.password);
     await this.delay(200);
-    this.signupForm.changeValue(this.signupForm.selfAttribution, 'other');
+    this.signupForm.changeValue(this.signupForm.selfAttribution, this.selfAttribution);
 
     if (this.autoSignup) {
       this.signupForm.submitForm();

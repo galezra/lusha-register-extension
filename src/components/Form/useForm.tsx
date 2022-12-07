@@ -7,11 +7,9 @@ function useForm() {
   const [localStorageValue, setLocalStorageValue] = useLocalStorage<ISignup>(FORM_VALUE_KEY, DEFAULT_FORM_VALUES);
   const [form, setForm] = useState<ISignup>(localStorageValue);
 
-  useEffect(() => {
-    setLocalStorageValue(form);
-  }, [form]);
+  const handleSubmit = (newForm: ISignup) => setLocalStorageValue(newForm);
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = event.target;
     const inputValue = event.target.type === 'checkbox' ? checked : value;
 
@@ -19,11 +17,12 @@ function useForm() {
       ...form,
       [name]: inputValue,
     });
-  }
+  };
 
   return {
     form,
     handleChange,
+    handleSubmit,
   };
 }
 

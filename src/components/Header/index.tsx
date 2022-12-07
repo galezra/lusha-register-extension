@@ -1,5 +1,5 @@
 import { HeaderContainer, Title } from './style';
-import LushaLogo from '../../../public/lusha-logo.png';
+import LushaLogo from '../../assets/lusha-logo.png';
 
 function Header() {
   return (
