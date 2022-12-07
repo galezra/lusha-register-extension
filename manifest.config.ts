@@ -9,7 +9,7 @@ const [major, minor, patch, label = '0'] = version
   // split into version parts
   .split(/[.-]/);
 
-export default defineManifest(async (env) => ({
+export default defineManifest(async () => ({
   manifest_version: 3,
   name: 'Simple tool to register lusha.com',
   version: `${major}.${minor}.${patch}.${label}`,
@@ -28,13 +28,13 @@ export default defineManifest(async (env) => ({
     },
   },
   background: {
-    service_worker: 'src/utils/background.js',
+    service_worker: 'src/utils/background.ts',
     type: 'module',
   },
-  permissions: ['runtime'],
+  permissions: ['runtime', 'tabs', 'activeTab', 'storage'],
   content_scripts: [
     {
-      matches: ['http://*.lusha.com/signup*', 'https://*.lusha.com/signup*'],
+      matches: ['http://*.lusha.com/*', 'https://*.lusha.com/*'],
       js: ['src/utils/content.ts'],
       run_at: 'document_end',
     },

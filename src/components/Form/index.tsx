@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import useForm from './useForm';
+import { FILL_FORM_EVENT } from '../../constants/global';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -27,19 +28,21 @@ const useStyles = makeStyles((theme: any) => ({
 
 const Form = ({ onClose }: any) => {
   const classes = useStyles();
-  const { form, handleChange } = useForm();
+  const { form, handleChange, handleSubmit } = useForm();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmitForm = async (e: any) => {
     e.preventDefault();
 
+    handleSubmit(form);
     chrome.runtime.sendMessage({
-      type: 'fillForm',
+      type: FILL_FORM_EVENT,
       data: form,
     });
+    onClose();
   };
 
   return (
-    <form className={classes.root} onSubmit={handleSubmit}>
+    <form className={classes.root} onSubmit={handleSubmitForm}>
       <TextField
         name='email'
         label='Email'
@@ -112,7 +115,7 @@ const Form = ({ onClose }: any) => {
       />
       <div>
         <Button type='submit' variant='contained' color='primary'>
-          Signup
+          Save
         </Button>
         <Button variant='contained' onClick={onClose}>
           Cancel
