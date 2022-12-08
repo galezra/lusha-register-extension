@@ -1,4 +1,4 @@
-import { FORM_VALUE_KEY, DEFAULT_FORM_VALUES, MESSAGE_EVENT } from './../constants/global';
+import { FORM_VALUE_KEY, DEFAULT_FORM_VALUES, MESSAGE_EVENT } from '../constants/global';
 import { Signup } from './Signup';
 
 const OPACITY_REGULAR = '0.6';
@@ -7,7 +7,7 @@ const OPACITY_CLICK = '1';
 
 (async () => {
   const formLocalStorage = await chrome.storage.local.get(FORM_VALUE_KEY);
-  let form = JSON.parse(formLocalStorage[FORM_VALUE_KEY]) || DEFAULT_FORM_VALUES;
+  let form = JSON.parse(formLocalStorage[FORM_VALUE_KEY] || JSON.stringify(DEFAULT_FORM_VALUES));
 
   chrome.runtime.onMessage.addListener((message) => {
     if (message.type === MESSAGE_EVENT.fillForm) {

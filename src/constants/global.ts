@@ -16,3 +16,9 @@ export const MESSAGE_EVENT = {
   fillForm: 'FILL_FORM',
   urlChanged: 'URL_CHANGED',
 };
+
+export const BUTTON_OPACITY = {
+  regular: '0.6',
+  over: '0.8',
+  click: '1',
+};

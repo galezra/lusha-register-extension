@@ -11,7 +11,7 @@ const [major, minor, patch, label = '0'] = version
 
 export default defineManifest(async () => ({
   manifest_version: 3,
-  name: 'Simple tool to register lusha.com',
+  name: 'The easiest way to register lusha.com',
   version: `${major}.${minor}.${patch}.${label}`,
   version_name: version,
   icons: {
@@ -24,18 +24,17 @@ export default defineManifest(async () => ({
     default_icon: {
       '16': 'logo16.png',
       '48': 'logo48.png',
-      '128': 'logo128.png',
     },
   },
   background: {
     service_worker: 'src/utils/background.ts',
     type: 'module',
   },
-  permissions: ['runtime', 'tabs', 'activeTab', 'storage'],
+  permissions: ['tabs', 'activeTab', 'storage'],
   content_scripts: [
     {
-      matches: ['http://*.lusha.com/signup*', 'https://*.lusha.com/signup*'],
-      js: ['src/utils/content.ts'],
+      matches: ['https://auth-local.lusha.com/*', 'https://auth-staging.lusha.com/*', 'https://auth.lusha.com/*'],
+      js: ['src/utils/content-script.ts'],
       run_at: 'document_start',
     },
   ],
