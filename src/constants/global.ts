@@ -12,4 +12,7 @@ export const DEFAULT_FORM_VALUES: ISignup = {
   autoSignup: true,
 };
 
-export const FILL_FORM_EVENT = 'fillForm';
+export const MESSAGE_EVENT = {
+  fillForm: 'FILL_FORM',
+  urlChanged: 'URL_CHANGED',
+};

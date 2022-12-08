@@ -34,9 +34,9 @@ export default defineManifest(async () => ({
   permissions: ['runtime', 'tabs', 'activeTab', 'storage'],
   content_scripts: [
     {
-      matches: ['http://*.lusha.com/*', 'https://*.lusha.com/*'],
+      matches: ['http://*.lusha.com/signup*', 'https://*.lusha.com/signup*'],
       js: ['src/utils/content.ts'],
-      run_at: 'document_end',
+      run_at: 'document_start',
     },
   ],
 }));
