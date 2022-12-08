@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Button from '@material-ui/core/Button';
 import useForm from './useForm';
-import { FILL_FORM_EVENT } from '../../constants/global';
+import { MESSAGE_EVENT } from '../../constants/global';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -35,7 +35,7 @@ const Form = ({ onClose }: any) => {
 
     handleSubmit(form);
     chrome.runtime.sendMessage({
-      type: FILL_FORM_EVENT,
+      type: MESSAGE_EVENT.fillForm,
       data: form,
     });
     onClose();
